@@ -1,9 +1,7 @@
 <p align="center">
   <img src="./Master%20Aniya.jpg" alt="LAW MASTER Logo" width="180" />
 </p>
-<p align="center">
-  <img src="./law%20aniya.png" alt="LAW ANIYA" width="220" />
-</p>
+
 
 <h1 align="center">LAW MASTER v2.0</h1>
 
