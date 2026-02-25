@@ -1,0 +1,28 @@
+# requirements.txt
+transformers
+peft
+accelerate
+sentence-transformers
+rich
+requests
+tqdm
+jieba
+gradio
+scikit-learn
+python-dotenv
+pypdf
+python-docx
+faster-whisper
+fastapi
+uvicorn
+python-multipart
+ddgs
+reportlab
+charset-normalizer
+Pillow
+pytesseract
+# Summarizer Dependencies
+beautifulsoup4
+readability-lxml
+PyYAML
+Jinja2

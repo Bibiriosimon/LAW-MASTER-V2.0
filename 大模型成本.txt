@@ -1,0 +1,124 @@
+下面给你整理 **GPT / Gemini / Claude / 豆包 / 千问 / DeepSeek** 等主流大模型的 **API 定价对比（以每百万 tokens 为单位、美元或人民币近似值）** 方便横向比较。因为每家平台定价规则略有不同（是否区分输入/输出、是否支持缓存/批量折扣等），我挑了最常见的基础计费公开信息来对比。
+
+---
+
+## 📌 一、OpenAI GPT API（国际站）
+
+**以最新的 GPT‑4.1 系列为例（主流开发者用）**
+
+| 模型           | 输入               | 缓存输入        | 输出         |               |
+| ------------ | ---------------- | ----------- | ---------- | ------------- |
+| GPT‑4.1      | $0.25 / 1M token | $0.025 / 1M | $2.00 / 1M | ([OpenAI][1]) |
+| GPT‑4.1 mini | $0.80 / 1M       | $0.20 / 1M  | $3.20 / 1M | ([OpenAI][1]) |
+| GPT‑4.1 nano | $0.20 / 1M       | $0.05 / 1M  | $0.80 / 1M | ([OpenAI][1]) |
+
+👉 **说明**：
+
+* 输入部分是你给模型 prompt/token 的计费；
+* 输出是模型生成文本的 token 计费。
+* 缓存输入是短期重用提示的更低价格。 ([OpenAI][1])
+
+---
+
+## 📌 二、Google Gemini API（公开信息通常按模型名定价）
+
+* 官方定价具体数值不如 OpenAI 明确公开，但多平台对比工具显示 Gemini 系列通常在 Tween‑tier 与 GPT‑4 之间，具体按版本/性能级别变化（如 Gemini‑2.5 Pro、Flash 等）。([GPT for Work][2])
+* 一些价格比较表显示典型大模型价格（Gemini‑images/text 版本）输入 ~$0.20 / 1M，输出 ~$0.36 / 1M tokens（与 GPT / Claude 对照）等。([GPT for Work][2])
+  **总的看法**：
+  ✔ 属于**中高价位**品类（比轻量模型便宜、比旗舰 GPT 模型便宜）
+  ✘ 官方具体数值可能随 region/contract 调整，不同型号间差异大。([GPT for Work][2])
+
+---
+
+## 📌 三、Anthropic Claude API（多档级别）
+
+定价通常按模型和输出复杂度分档（每百万 tokens）：
+
+| 模型                     | 输入          | 输出           |                |
+| ---------------------- | ----------- | ------------ | -------------- |
+| Claude Haiku 4.5       | **$1** / 1M | **$5** / 1M  | ([MetaCTO][3]) |
+| Claude Sonnet 4.5 (主推) | **$3** / 1M | **$15** / 1M | ([MetaCTO][3]) |
+| Claude Opus 4.5 (旗舰)   | **$5** / 1M | **$25** / 1M | ([MetaCTO][3]) |
+
+👉 Claude 支持**批量 API 和缓存折扣**（可以进一步降成本 50%+）。([MetaCTO][3])
+
+---
+
+## 📌 四、DeepSeek API 定价（推理模型）
+
+根据维基百科与行业统计数据：
+
+* DeepSeek‑R1 系列定价约：
+
+  * 输入 tokens：**约¥1 / 1M 输入**（命中缓存）/ **¥4 / 1M**（缓存未命中）
+  * 输出 tokens：**约¥16 / 1M** ([维基百科][4])
+
+（约合 USD：¥16 ≈ ~$2–$2.5 per 1M output tokens）
+
+👉 价格显著低于 GPT / Claude 旗舰级别。([维基百科][4])
+
+---
+
+## 📌 五、中国国内部分主流 LLM API（大致区间）
+
+> **注意**：国内厂商价格公开性不如国外统一标准，这里给出主要模型的大致范围（元/百万 tokens），供参考。
+
+### 🟡 豆包 Doubao （来自火山引擎）
+
+* Doubao‑Seed 系列（成本较低）：
+
+  * **输入约 ¥0.3–¥0.8 / 1M tokens**
+  * **输出约 ¥0.6–¥2 / 1M tokens** ([火山引擎][5])
+
+👉 这是国内**性价比较高的轻量级**中文模型 API 价格。([火山引擎][5])
+
+### 🟢 通义千问（Qwen 系列）API
+
+阿里云 Model Studio 官方文档表明：
+
+* Qwen‑based 模型按输入/输出 Token 计费
+* 千问‑Max 等旗舰模型按自身定价，在阿里云平台 API 实际收费根据地区可能不同（目前官方文档表明按 Token 计费）。([阿里云帮助中心][6])
+
+👉 具体数值一般比豆包高、比 DeepSeek 稍高或接近。([LLM价格对比][7])
+
+---
+
+## 📌 六、横向总结对比（简化版）
+
+| 模型族                           | 输入（约）          | 输出（约）          | 备注                                       |
+| ----------------------------- | -------------- | -------------- | ---------------------------------------- |
+| **GPT-4.1 (OpenAI)**          | ~$0.25/M       | ~$2.00/M       | 中等‑高价位 ([OpenAI][1])                     |
+| **Gemini**                    | ~$0.20–0.30/M  | ~$0.36/M       | 中等价位（按对比表） ([GPT for Work][2])           |
+| **Claude Sonnet (Anthropic)** | **$3/M**       | **$15/M**      | 性能与成本平衡 ([MetaCTO][3])                   |
+| **Claude Haiku**              | $1/M           | $5/M           | 较低价位 ([MetaCTO][3])                      |
+| **Claude Opus**               | $5/M           | $25/M          | 旗舰高价位 ([MetaCTO][3])                     |
+| **DeepSeek‑R1**               | ~¥1–¥4/M       | ~¥16/M         | 本地箱价低（约 $2–$2.5 输出） ([维基百科][4])          |
+| **豆包 Doubao**                 | ~¥0.3–¥0.8/M   | ~¥0.6–¥2/M     | 国内低成本 ([火山引擎][5])                        |
+| **通义千问**                      | 国内平台按 Token 计费 | 国内平台按 Token 计费 | 通常与 Doubao/DeepSeek 同级或略高 ([阿里云帮助中心][6]) |
+
+---
+
+## 📌 注意事项
+
+* **输出/输入计费模型不同**：OpenAI、Anthropic 等明确分开，而部分国内平台可能不明确区分或按统一价格计。([zhuanlan.zhihu.com][8])
+* **上下文长度/Token 缓存**：有的提供批量/缓存折扣、长上下文不同分段收费。([MetaCTO][3])
+* **汇率与平台折扣**：国内平台有时按人民币计费，与美元汇率有关。([LLM价格对比][7])
+
+---
+
+如果你想要，我也可以：
+
+🔹 给你整理成 **元/百万 token** 的对照（根据 1 USD ≈ 7 RMB）
+🔹 按使用场景（例如每 1000 tokens / 每月 10M tokens 等）做成本估算
+🔹 按输出质量 vs 价格构建性价比推荐方案
+
+只要告诉我你更关注哪个方向，我就继续补全。
+
+[1]: https://openai.com/zh-Hans-CN/api/pricing/?utm_source=chatgpt.com "API 定价"
+[2]: https://gptforwork.com/tools/openai-chatgpt-api-pricing-calculator?utm_source=chatgpt.com "OpenAI API Pricing Calculator"
+[3]: https://www.metacto.com/blogs/anthropic-api-pricing-a-full-breakdown-of-costs-and-integration?utm_source=chatgpt.com "Anthropic Claude API Pricing 2026: Complete Cost ..."
+[4]: https://zh.wikipedia.org/wiki/DeepSeek-R1?utm_source=chatgpt.com "DeepSeek-R1"
+[5]: https://www.volcengine.com/product/doubao?utm_source=chatgpt.com "豆包大模型"
+[6]: https://help.aliyun.com/zh/model-studio/model-pricing?utm_source=chatgpt.com "阿里云百炼模型价格 - 文档"
+[7]: https://llmprice.cn/?utm_source=chatgpt.com "LLM 大模型价格对比- llmprice.cn"
+[8]: https://zhuanlan.zhihu.com/p/709209654?utm_source=chatgpt.com "大模型商用API最新价格汇总（持续更新）"

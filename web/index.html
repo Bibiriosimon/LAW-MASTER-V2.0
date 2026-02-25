@@ -1,0 +1,238 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LAW MASTER v2.0</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo"><img src="/assets/logo.jpg" alt="LAW MASTER" /></div>
+          <div class="title">
+            <div class="name">LAW MASTER v2.0</div>
+            <div class="sub">Proudly made by Bibi Workshop</div>
+          </div>
+        </div>
+        <div class="status">Local UI</div>
+      </header>
+
+      <main class="layout">
+        <section class="chat-area">
+          <div class="mode-bar">
+            <div class="mode-label">模式</div>
+            <label class="switch">
+              <input id="agentMode" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+            <div class="mode-text">自我意识模式</div>
+          </div>
+          <div id="chat" class="chat"></div>
+          <div class="composer">
+            <button id="plusBtn" class="plus">+</button>
+            <div id="plusMenu" class="plus-menu hidden">
+              <label class="menu-item">
+                <input id="fileInput" type="file" />
+                <span>上传文件</span>
+              </label>
+              <button id="webSearchToggle" class="menu-item">网页搜索</button>
+              <div class="menu-item">
+                <span>文书类型</span>
+                <select id="docType">
+                  <option value="申诉书">申诉书</option>
+                  <option value="投诉信">投诉信</option>
+                  <option value="律师函">律师函</option>
+                  <option value="起诉状">起诉状</option>
+                  <option value="通用文书">通用文书</option>
+                </select>
+              </div>
+              <button id="recordBtn" class="menu-item">语音输入</button>
+              <div id="fileNote" class="menu-note"></div>
+            </div>
+            <textarea id="prompt" rows="2" placeholder="输入你的法律问题..."></textarea>
+            <button id="sendBtn" class="send">发送</button>
+          </div>
+        </section>
+
+        <aside class="side">
+          <div class="panel">
+            <div class="panel-title">探索过程（实时）</div>
+            <div id="traceStatus" class="status-badge"><span class="pulse"></span>待命</div>
+            <div class="progress-wrap">
+              <div id="progressLabel" class="mono">进度 0%</div>
+              <div class="progress-bar"><div id="progressFill"></div></div>
+            </div>
+            <div id="traceList" class="mono" style="margin-top: 8px;"></div>
+            <div class="conn-row">
+              <button id="planDetailBtn" class="send">探索计划详情</button>
+            </div>
+            <div id="mindmapStatus" class="mindmap-status idle">思维导图：待生成</div>
+          </div>
+
+          <div class="panel session-panel">
+            <div class="session-grid">
+              <button id="newChatBtn" class="btn-light session-new-btn">新聊天</button>
+              <div class="session-current-box">
+                <div class="session-label">当前会话</div>
+                <div id="currentChatTitle" class="session-current-title">新聊天</div>
+              </div>
+              <div class="session-list-box">
+                <button id="myChatsToggle" class="accordion">
+                  <span>我的聊天</span>
+                  <span id="myChatsChevron" class="chevron">▼</span>
+                </button>
+                <div id="myChatsWrap" class="accordion-body collapsed">
+                  <div id="myChatsList" class="my-chats-list"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <button id="retrievalToggle" class="accordion">
+              <span>检索详情（点击展开）</span>
+              <span id="retrievalDot" class="notify-dot"></span>
+              <span id="retrievalChevron" class="chevron">▼</span>
+            </button>
+            <div id="retrievalWrap" class="accordion-body collapsed">
+              <div id="retrieval" class="mono"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <button id="searchToggle" class="accordion">
+              <span>网页搜索结果（点击展开）</span>
+              <span id="searchDot" class="notify-dot"></span>
+              <span id="searchChevron" class="chevron">▼</span>
+            </button>
+            <div id="searchWrap" class="accordion-body collapsed">
+              <div id="searchResults" class="mono"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">专业文书助手</div>
+            <div class="doc-panel-actions">
+              <button id="docPanelBtn" class="btn-light">生成文档</button>
+            </div>
+            <div id="downloads" class="mono"></div>
+          </div>
+
+          <div class="panel">
+            <button id="moreToggle" class="accordion">
+              <span>更多...</span>
+              <span id="moreChevron" class="chevron">▼</span>
+            </button>
+            <div id="moreWrap" class="accordion-body collapsed">
+              <div class="more-section">
+                <div class="panel-title">连接设置</div>
+                <label>DeepSeek API Key</label>
+                <input id="apiKey" type="password" placeholder="若已设置环境变量可留空" />
+                <label>Base URL</label>
+                <input id="baseUrl" value="https://api.deepseek.com/v1" />
+                <label>Model</label>
+                <input id="model" value="deepseek-chat" />
+                <label>站点区域</label>
+                <select id="siteRegion">
+                  <option value="cn_priority">中国大陆优先（不足则扩展）</option>
+                  <option value="cn_only">仅中国大陆站点（.cn/.gov.cn/.edu.cn）</option>
+                  <option value="global">全球站点</option>
+                </select>
+                <div class="conn-row">
+                  <button id="connectBtn" class="send">连接</button>
+                  <span id="connStatus" class="status-badge"><span class="pulse"></span>未连接</span>
+                </div>
+                <div class="conn-row">
+                  <button id="diagBtn" class="send">搜索诊断</button>
+                </div>
+                <div id="diagOutput" class="mono"></div>
+              </div>
+
+              <div class="more-section">
+                <div class="panel-title">检索参数</div>
+                <label>Top-K</label>
+                <input id="topK" type="number" min="1" max="10" value="5" />
+                <label>预期网页数</label>
+                <input id="searchTarget" type="number" min="1" max="50" value="20" />
+                <label>关键词权重</label>
+                <input id="kwWeight" type="number" min="0" max="1" step="0.05" value="0.7" />
+                <label>语义权重</label>
+                <input id="vecWeight" type="number" min="0" max="1" step="0.05" value="0.3" />
+                <label>OCR 引擎</label>
+                <select id="ocrEngine">
+                  <option value="browser">浏览器（Tesseract.js）</option>
+                </select>
+                <label>OCR 路径</label>
+                <input id="ocrPath" type="text" placeholder="自动检测中..." readonly />
+              </div>
+
+              <div class="more-section">
+                <div class="panel-title">错误信息</div>
+                <div id="errors" class="mono error"></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <div id="planModal" class="modal hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>探索计划详情</div>
+          <button id="planClose" class="modal-close">×</button>
+        </div>
+        <div id="planContent" class="mono"></div>
+      </div>
+    </div>
+
+    <div id="mindmapDetailModal" class="modal hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>节点详情</div>
+          <button id="mindmapDetailClose" class="modal-close">×</button>
+        </div>
+        <div id="mindmapDetailBody" class="mindmap-detail-body"></div>
+      </div>
+    </div>
+
+    <div id="docModal" class="modal hidden">
+      <div class="modal-card doc-modal">
+        <div class="modal-header">
+          <div>文书预览</div>
+          <button id="docClose" class="modal-close">×</button>
+        </div>
+        <div class="doc-notice">
+          <div class="doc-notice-title">请补充个人信息</div>
+          <div class="doc-notice-body">为提升文书效果，请填写姓名、联系方式、地址等必要信息。我们会保护你的信息安全。</div>
+        </div>
+        <div class="doc-toolbar">
+          <div class="doc-title" id="docModalTitle"></div>
+          <div class="doc-actions">
+            <button id="docGenBtn" class="btn-light">生成 PDF</button>
+          </div>
+        </div>
+        <div class="doc-sheet">
+          <div id="docEditor" class="doc-editor" contenteditable="true"></div>
+        </div>
+        <div class="doc-ai">
+          <textarea id="docAiInput" rows="2" placeholder="输入微调指令，例如：语气更严谨一些，补充诉求并压缩篇幅"></textarea>
+          <button id="docAiBtn" class="btn-light">AI 微调</button>
+        </div>
+        <div class="doc-suggest">
+          <button class="chip" data-prompt="语气严谨一些">语气严谨一些</button>
+          <button class="chip" data-prompt="更正式、更像律师函">更正式</button>
+          <button class="chip" data-prompt="压缩为更简洁的三段式">更简洁</button>
+          <button class="chip" data-prompt="补充法律依据与条款引用">补充法条</button>
+          <button class="chip" data-prompt="强调事实经过与证据清单">强化证据</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/assets/tesseract/tesseract.min.js"></script>
+    <script src="/assets/app.js?v=20260225v8"></script>
+  </body>
+</html>
+
