@@ -1,6 +1,9 @@
 <p align="center">
   <img src="./Master%20Aniya.jpg" alt="LAW MASTER Logo" width="180" />
 </p>
+<p align="center">
+  <img src="./law%20aniya.png" alt="LAW ANIYA" width="220" />
+</p>
 
 <h1 align="center">LAW MASTER v2.0</h1>
 
@@ -41,16 +44,16 @@ LAW MASTER v2.0 是一个面向法律场景的智能体应用。
 - 性能优化：案例分析与思维导图并行执行。
 
 ## 技术架构
-```mermaid
-flowchart LR
-  U[User] --> W[Web UI / Mini Program]
-  W --> A[FastAPI app_fastapi.py]
-  A --> R1[Law Corpus Index]
-  A --> R2[Case Corpus Index]
-  A --> S[Web Search]
-  A --> M[DeepSeek API]
-  A --> P[PDF Export]
-  A --> C[(Local Cache & Session State)]
+```text
+User
+  -> Web UI / Mini Program
+      -> FastAPI (app_fastapi.py)
+          -> Law Corpus Index
+          -> Case Corpus Index
+          -> Web Search
+          -> DeepSeek API
+          -> PDF Export
+          -> Local Cache & Session State
 ```
 
 ## 目录结构
